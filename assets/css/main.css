@@ -3531,7 +3531,7 @@ header.major > .date:after {
     line-height: 4rem;
     margin: -4rem auto 0 auto;
     overflow: hidden;
-    padding: 0 2rem 0 0;
+    padding: 0 0.5rem;
     position: relative;
     width: calc(100% - 4rem);
     max-width: 72rem;
@@ -3618,6 +3618,7 @@ header.major > .date:after {
     display: block;
     padding-left: 0;
     position: relative;
+    flex: 1 1 auto; /* Share the bar evenly between menu items */
 }
 
 #nav ul.links li a {
