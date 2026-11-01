@@ -105,6 +105,16 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
+  // A link ending in #patterns (from the CV) opens straight on the pattern viewer and its slider.
+  var target = null;
+  try { target = location.hash && document.querySelector(location.hash); } catch (e) {}
+  if (target) {
+    sessionStorage.setItem('visited', 'true');
+    var go = function () { target.scrollIntoView({ block: "center", behavior: "instant" }); };
+    go();
+    window.addEventListener("load", function () { setTimeout(go, 60); });
+    return;
+  }
   // Check if this is the first visit to the site
   const isFirstVisit = !sessionStorage.getItem('visited');
   
@@ -204,7 +214,7 @@ document.addEventListener("DOMContentLoaded", function() {
   </header>
 
   <!-- Main: pattern viewer. One tile or in repeat, size slider, arrows, swipe and colorways -->
-  <section class="pv" data-viewer aria-label="Pattern viewer">
+  <section class="pv" id="patterns" data-viewer aria-label="Pattern viewer">
     <div class="viewer-stage" data-repeat="block">
       <img class="viewer-single" draggable="false" src="assets/images/toile-de-jouy-park-tile.jpg" width="800" height="800" alt="Modern Whimsical Toile de Jouy Park Scene, surface pattern by Virrvarrvilt">
       <button type="button" class="viewer-arrow viewer-prev" data-prev aria-label="Previous pattern" hidden>&#8592;</button><button type="button" class="viewer-arrow viewer-next" data-next aria-label="Next pattern" hidden>&#8594;</button>
