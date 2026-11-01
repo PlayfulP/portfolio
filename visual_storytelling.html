@@ -57,44 +57,6 @@
       color: inherit !important;
     }
   </style>
-<style>
-  /* Pattern viewer (Virrvarrvilt banner kit), scoped to .pv so the template styles stay untouched */
-  .pv { --ink: #363330; --grey: #6e655b; --line: #DCD3C3; --cream: #F3EDE0; --paper: #FAF7F0; margin-bottom: 1.5rem; }
-  .pv [hidden] { display: none !important; }
-  .pv .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-  .pv .viewer-stage { position: relative; height: clamp(380px, 70vh, 800px); background-color: var(--paper); background-repeat: no-repeat;
-    background-position: center; display: grid; place-items: center; overflow: hidden; transition: background-size .45s ease; touch-action: pan-y; }
-  .pv .viewer-single { width: min(420px, 76vw, 62vh); max-width: none; height: auto !important; box-shadow: 0 30px 60px -40px rgba(54, 51, 48, .5); transition: opacity .45s ease, transform .45s ease; }
-  .pv .viewer-single, .pv .viewer-stage { -webkit-user-drag: none; user-select: none; -webkit-user-select: none; }
-  .pv .viewer-single { pointer-events: none; }
-  .pv-note { margin: -0.75rem 0 1.5rem; text-align: center; font-size: .75rem; letter-spacing: .04em; color: #6e655b; }
-  .pv .viewer-stage.is-repeat .viewer-single { opacity: 0; transform: scale(.94); }
-  .pv button { appearance: none !important; height: auto !important; line-height: 1 !important; padding: 0 !important; margin: 0; box-shadow: none !important;
-    border-radius: 0; letter-spacing: .05em !important; text-transform: none !important; font-weight: 400 !important; font-size: .88rem !important; white-space: nowrap; cursor: pointer; }
-  .pv .viewer-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 2; width: 3.2rem; height: 3.2rem !important; border-radius: 50%;
-    border: 1px solid var(--ink) !important; background: var(--cream) !important; color: var(--ink) !important; font-size: 1.2rem !important; }
-  .pv .viewer-arrow:hover { background: var(--ink) !important; color: var(--cream) !important; }
-  .pv .viewer-prev { left: clamp(.75rem, 3vw, 2.5rem); }
-  .pv .viewer-next { right: clamp(.75rem, 3vw, 2.5rem); }
-  .pv .viewer-swatches { position: absolute; left: 50%; bottom: 1rem; transform: translateX(-50%); z-index: 2; display: flex; gap: .55rem; padding: .45rem;
-    background: var(--cream); border: 1px solid var(--line); }
-  .pv .swatch { width: 2.75rem; height: 2.75rem !important; border: 1px solid var(--line) !important; background-color: var(--paper) !important;
-    background-size: cover !important; background-position: center !important; }
-  .pv .swatch[aria-pressed="true"] { outline: 2px solid var(--ink); outline-offset: 2px; }
-  .pv .viewer-controls { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem 2rem; padding: 1.1rem 0 0; justify-content: center; }
-  .pv .toggle { display: inline-flex; border: 1px solid var(--ink); }
-  .pv .toggle button { background: transparent !important; color: var(--ink) !important; padding: .55rem 1.2rem !important; }
-  .pv .toggle button[aria-pressed="true"] { background: var(--ink) !important; color: var(--cream) !important; }
-  .pv .scale { display: inline-flex; align-items: center; gap: .9rem; margin: 0; font-size: .8rem; font-weight: 400; letter-spacing: .1em; text-transform: uppercase; color: var(--grey); }
-  .pv .scale input { width: min(280px, 42vw); accent-color: var(--ink); appearance: auto; -webkit-appearance: auto; opacity: 1; display: inline-block; margin: 0; }
-  @media (max-width: 720px) {
-    .pv .viewer-stage { height: clamp(380px, 68vh, 560px); }
-    .pv .viewer-controls { justify-content: center; }
-    .pv .viewer-arrow { width: 2.5rem; height: 2.5rem !important; font-size: 1rem !important; }
-    .pv .viewer-prev { left: .5rem; }
-    .pv .viewer-next { right: .5rem; }
-  }
-</style>
 </head>
 
 <body>
@@ -105,12 +67,12 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-  // A link ending in #patterns (from the CV) opens straight on the pattern viewer and its slider.
+  // A link ending in #patterns (from the CV) opens straight on the Patterns section.
   var target = null;
   try { target = location.hash && document.querySelector(location.hash); } catch (e) {}
   if (target) {
     sessionStorage.setItem('visited', 'true');
-    var go = function () { target.scrollIntoView({ block: "center", behavior: "instant" }); };
+    var go = function () { target.scrollIntoView({ block: "start", behavior: "instant" }); };
     go();
     window.addEventListener("load", function () { setTimeout(go, 60); });
     return;
@@ -206,25 +168,13 @@ document.addEventListener("DOMContentLoaded", function() {
 </article>
 
 <!-- Patterns -->
-<article class="post featured">
+<article class="post featured" id="patterns">
   <header class="major">
     <h2 class="h11" style="font-size:2rem;">Patterns</h2>
     <img src="assets/images/virrvarrvilt_logo.svg" alt="Virrvarrvilt" style="height:4.5rem; width:auto; display:block; margin:0.75rem auto 0.25rem;" />
     <span class="date">2026</span>
   </header>
 
-  <!-- Main: pattern viewer. One tile or in repeat, size slider, arrows, swipe and colorways -->
-  <section class="pv" id="patterns" data-viewer aria-label="Pattern viewer">
-    <div class="viewer-stage" role="img" aria-label="Pattern">
-      <button type="button" class="viewer-arrow viewer-prev" data-prev aria-label="Previous pattern" hidden>&#8592;</button><button type="button" class="viewer-arrow viewer-next" data-next aria-label="Next pattern" hidden>&#8594;</button>
-      <div class="viewer-swatches" data-swatches role="group" aria-label="Colorways" hidden></div>
-    </div>
-    <div class="viewer-controls" data-controls hidden>
-      <ul class="sr" data-slides><li><span data-slide data-src="assets/images/patterns/toile-de-jouy-park-swatch.jpg" data-alt="Modern Whimsical Toile de Jouy Park Scene, surface pattern by Virrvarrvilt" data-repeat="block">Modern Whimsical Toile de Jouy Park Scene</span></li><li><span data-slide data-src="assets/images/patterns/navy-flame-stitch-swatch.jpg" data-alt="Navy Flame Stitch, surface pattern by Virrvarrvilt" data-repeat="block">Navy Flame Stitch</span></li><li><span data-slide data-src="assets/images/patterns/pink-violet-weave-swatch.jpg" data-alt="Pink Violet Weave, surface pattern by Virrvarrvilt" data-repeat="block">Pink Violet Weave</span></li><li><span data-slide data-src="assets/images/patterns/tangled-ribbons-swatch.jpg" data-alt="Tangled Ribbons, surface pattern by Virrvarrvilt" data-repeat="block">Tangled Ribbons</span></li><li><span data-slide data-src="assets/images/patterns/moire-waves-swatch.jpg" data-alt="Moiré Waves, surface pattern by Virrvarrvilt" data-repeat="block">Moiré Waves</span></li><li><span data-slide data-src="assets/images/patterns/pastel-space-dye-swatch.jpg" data-alt="Pastel Space Dye, surface pattern by Virrvarrvilt" data-repeat="block">Pastel Space Dye</span></li><li><span data-slide data-src="assets/images/patterns/holographic-patchwork-swatch.jpg" data-alt="Holographic Patchwork, surface pattern by Virrvarrvilt" data-repeat="block">Holographic Patchwork</span></li><li><span data-slide data-src="assets/images/patterns/color-block-grid-six-color-swatch.jpg" data-alt="Color Block Grid, surface pattern by Virrvarrvilt" data-repeat="block">Color Block Grid</span><ul><li><span data-variant data-src="assets/images/patterns/color-block-grid-six-color-swatch.jpg" data-thumb="assets/images/patterns/color-block-grid-six-color-swatch-thumb.jpg">Six color</span></li><li><span data-variant data-src="assets/images/patterns/color-block-grid-pink-mustard-swatch.jpg" data-thumb="assets/images/patterns/color-block-grid-pink-mustard-swatch-thumb.jpg">Pink &amp; mustard</span></li></ul></li><li><span data-slide data-src="assets/images/patterns/midnight-shapes-swatch.jpg" data-alt="Midnight Shapes, surface pattern by Virrvarrvilt" data-repeat="block">Midnight Shapes</span></li><li><span data-slide data-src="assets/images/patterns/coral-teal-loops-swatch.jpg" data-alt="Coral &amp; Teal Loops, surface pattern by Virrvarrvilt" data-repeat="block">Coral &amp; Teal Loops</span></li><li><span data-slide data-src="assets/images/patterns/atomic-diamonds-swatch.jpg" data-alt="Atomic Diamonds, surface pattern by Virrvarrvilt" data-repeat="block">Atomic Diamonds</span></li><li><span data-slide data-src="assets/images/patterns/fairy-tale-forest-swatch.jpg" data-alt="Fairy Tale Forest, surface pattern by Virrvarrvilt" data-repeat="block">Fairy Tale Forest</span></li><li><span data-slide data-src="assets/images/patterns/woven-plaid-black-swatch.jpg" data-alt="Woven Plaid, surface pattern by Virrvarrvilt" data-repeat="block">Woven Plaid</span><ul><li><span data-variant data-src="assets/images/patterns/woven-plaid-black-swatch.jpg" data-thumb="assets/images/patterns/woven-plaid-black-swatch-thumb.jpg">Black</span></li><li><span data-variant data-src="assets/images/patterns/woven-plaid-violet-swatch.jpg" data-thumb="assets/images/patterns/woven-plaid-violet-swatch-thumb.jpg">Violet</span></li><li><span data-variant data-src="assets/images/patterns/woven-plaid-brown-swatch.jpg" data-thumb="assets/images/patterns/woven-plaid-brown-swatch-thumb.jpg">Brown</span></li></ul></li></ul>
-      <label class="scale"><span>Smaller</span><input type="range" min="100" max="200" step="5" value="100" data-scale aria-label="Zoom"><span>Bigger</span></label>
-    </div>
-  </section>
-  <p class="pv-note">© Virrvarrvilt. All designs are protected and not for reuse or resale.</p>
   <!-- Two Smaller Images -->
   <div class="small-images">
     <img src="assets/images/pattern_detail1.png" alt="" style="aspect-ratio:4/3; object-fit:cover;">
@@ -391,90 +341,5 @@ $(document).ready(function() {
 });
 </script>
 
-<script>
-/* Virrvarrvilt pattern viewer: prebaked swatches (no repeat tile is ever sent), zoom slider, arrows, swipe, colorway thumbnails. */
-(function () {
-  "use strict";
-  document.querySelectorAll("[data-viewer]").forEach(function (v) {
-    var stage = v.querySelector(".viewer-stage"), range = v.querySelector("[data-scale]");
-    var box = v.querySelector("[data-swatches]"), slides = v.querySelectorAll("[data-slide]"), cur = 0;
-    v.querySelector("[data-controls]").hidden = false;
-
-    // The slider zooms the swatch: 100 fills the stage, 200 shows it twice as large.
-    function size() {
-      var cover = Math.max(stage.clientWidth, stage.clientHeight);
-      stage.style.backgroundSize = Math.round(cover * range.value / 100) + "px";
-    }
-    function load(src, alt) {
-      var im = new Image();
-      im.onload = function () {
-        stage.style.backgroundImage = 'url("' + src + '")';
-        stage.setAttribute("aria-label", alt);
-        size();
-      };
-      im.src = src;
-    }
-    // Colorways: small thumbnails at the bottom of the stage swap the pattern in place.
-    function swatches(slide) {
-      if (!box) return;
-      var vs = slide.parentNode.querySelectorAll("[data-variant]"), alt = slide.getAttribute("data-alt");
-      box.textContent = "";
-      box.hidden = vs.length < 2;
-      [].forEach.call(vs, function (s, i) {
-        var b = document.createElement("button");
-        b.type = "button"; b.className = "swatch";
-        b.setAttribute("aria-label", s.textContent);
-        b.setAttribute("aria-pressed", String(i === 0));
-        b.title = s.textContent;
-        b.style.backgroundImage = 'url("' + s.getAttribute("data-thumb") + '")';
-        b.addEventListener("click", function () {
-          box.querySelectorAll(".swatch").forEach(function (o) { o.setAttribute("aria-pressed", String(o === b)); });
-          load(s.getAttribute("data-src"), alt + ", " + s.textContent);
-        });
-        box.appendChild(b);
-      });
-    }
-    function show(n) {
-      cur = (n + slides.length) % slides.length;
-      var s = slides[cur];
-      load(s.getAttribute("data-src"), s.getAttribute("data-alt"));
-      swatches(s);
-    }
-
-    range.addEventListener("input", size);
-    window.addEventListener("resize", size);
-
-    // Several patterns: arrows, arrow keys and a swipe step through them, one at a time.
-    if (slides.length > 1) {
-      var prev = v.querySelector("[data-prev]"), next = v.querySelector("[data-next]");
-      prev.hidden = next.hidden = false;
-      prev.addEventListener("click", function () { show(cur - 1); });
-      next.addEventListener("click", function () { show(cur + 1); });
-      v.addEventListener("keydown", function (e) {
-        if (e.target.matches && e.target.matches("input")) return;
-        if (e.key === "ArrowLeft") show(cur - 1);
-        if (e.key === "ArrowRight") show(cur + 1);
-      });
-      var x0 = null, y0 = null;
-      stage.addEventListener("touchstart", function (e) { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive: true });
-      stage.addEventListener("touchend", function (e) {
-        if (x0 === null) return;
-        var dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0;
-        if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) show(cur + (dx < 0 ? 1 : -1));
-        x0 = null;
-      }, { passive: true });
-    }
-
-    // Keep the patterns from being saved with a right click or a drag (as far as a browser allows).
-    var art = v.closest("article") || v;
-    var guard = function (e) { if (e.target.closest(".pv, img")) e.preventDefault(); };
-    art.addEventListener("contextmenu", guard);
-    art.addEventListener("dragstart", guard);
-    art.querySelectorAll("img").forEach(function (i) { i.setAttribute("draggable", "false"); });
-
-    show(0);
-  });
-})();
-</script>
 </body>
 </html>
