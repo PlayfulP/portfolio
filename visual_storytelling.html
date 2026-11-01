@@ -62,7 +62,7 @@
   .pv { --ink: #363330; --grey: #6e655b; --line: #DCD3C3; --cream: #F3EDE0; --paper: #FAF7F0; margin-bottom: 1.5rem; }
   .pv [hidden] { display: none !important; }
   .pv .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-  .pv .viewer-stage { position: relative; height: clamp(380px, 70vh, 800px); background-color: var(--paper); background-repeat: repeat;
+  .pv .viewer-stage { position: relative; height: clamp(380px, 70vh, 800px); background-color: var(--paper); background-repeat: no-repeat;
     background-position: center; display: grid; place-items: center; overflow: hidden; transition: background-size .45s ease; touch-action: pan-y; }
   .pv .viewer-single { width: min(420px, 76vw, 62vh); max-width: none; height: auto !important; box-shadow: 0 30px 60px -40px rgba(54, 51, 48, .5); transition: opacity .45s ease, transform .45s ease; }
   .pv .viewer-single, .pv .viewer-stage { -webkit-user-drag: none; user-select: none; -webkit-user-select: none; }
@@ -215,14 +215,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
   <!-- Main: pattern viewer. One tile or in repeat, size slider, arrows, swipe and colorways -->
   <section class="pv" id="patterns" data-viewer aria-label="Pattern viewer">
-    <div class="viewer-stage" data-repeat="block">
-      <img class="viewer-single" draggable="false" src="assets/images/toile-de-jouy-park-tile.jpg" width="800" height="800" alt="Modern Whimsical Toile de Jouy Park Scene, surface pattern by Virrvarrvilt">
+    <div class="viewer-stage" role="img" aria-label="Pattern">
       <button type="button" class="viewer-arrow viewer-prev" data-prev aria-label="Previous pattern" hidden>&#8592;</button><button type="button" class="viewer-arrow viewer-next" data-next aria-label="Next pattern" hidden>&#8594;</button>
       <div class="viewer-swatches" data-swatches role="group" aria-label="Colorways" hidden></div>
     </div>
     <div class="viewer-controls" data-controls hidden>
-      <ul class="sr" data-slides><li><span data-slide data-src="assets/images/toile-de-jouy-park-tile.jpg" data-alt="Modern Whimsical Toile de Jouy Park Scene, surface pattern by Virrvarrvilt" data-repeat="block">Modern Whimsical Toile de Jouy Park Scene</span></li><li><span data-slide data-src="assets/images/patterns/navy-flame-stitch-tile.jpg" data-alt="Navy Flame Stitch, surface pattern by Virrvarrvilt" data-repeat="block">Navy Flame Stitch</span></li><li><span data-slide data-src="assets/images/patterns/pink-violet-weave-tile.jpg" data-alt="Pink Violet Weave, surface pattern by Virrvarrvilt" data-repeat="block">Pink Violet Weave</span></li><li><span data-slide data-src="assets/images/patterns/tangled-ribbons-tile.jpg" data-alt="Tangled Ribbons, surface pattern by Virrvarrvilt" data-repeat="block">Tangled Ribbons</span></li><li><span data-slide data-src="assets/images/patterns/moire-waves-tile.jpg" data-alt="Moiré Waves, surface pattern by Virrvarrvilt" data-repeat="block">Moiré Waves</span></li><li><span data-slide data-src="assets/images/patterns/pastel-space-dye-tile.jpg" data-alt="Pastel Space Dye, surface pattern by Virrvarrvilt" data-repeat="block">Pastel Space Dye</span></li><li><span data-slide data-src="assets/images/patterns/holographic-patchwork-tile.jpg" data-alt="Holographic Patchwork, surface pattern by Virrvarrvilt" data-repeat="block">Holographic Patchwork</span></li><li><span data-slide data-src="assets/images/patterns/color-block-grid-six-color-tile.jpg" data-alt="Color Block Grid, surface pattern by Virrvarrvilt" data-repeat="block">Color Block Grid</span><ul><li><span data-variant data-src="assets/images/patterns/color-block-grid-six-color-tile.jpg" data-thumb="assets/images/patterns/color-block-grid-six-color-tile-thumb.jpg">Six color</span></li><li><span data-variant data-src="assets/images/patterns/color-block-grid-pink-mustard-tile.jpg" data-thumb="assets/images/patterns/color-block-grid-pink-mustard-tile-thumb.jpg">Pink &amp; mustard</span></li></ul></li><li><span data-slide data-src="assets/images/patterns/midnight-shapes-tile.jpg" data-alt="Midnight Shapes, surface pattern by Virrvarrvilt" data-repeat="block">Midnight Shapes</span></li><li><span data-slide data-src="assets/images/patterns/coral-teal-loops-tile.jpg" data-alt="Coral &amp; Teal Loops, surface pattern by Virrvarrvilt" data-repeat="block">Coral &amp; Teal Loops</span></li><li><span data-slide data-src="assets/images/patterns/atomic-diamonds-tile.jpg" data-alt="Atomic Diamonds, surface pattern by Virrvarrvilt" data-repeat="block">Atomic Diamonds</span></li><li><span data-slide data-src="assets/images/patterns/fairy-tale-forest-tile.jpg" data-alt="Fairy Tale Forest, surface pattern by Virrvarrvilt" data-repeat="block">Fairy Tale Forest</span></li><li><span data-slide data-src="assets/images/patterns/woven-plaid-black-tile.jpg" data-alt="Woven Plaid, surface pattern by Virrvarrvilt" data-repeat="block">Woven Plaid</span><ul><li><span data-variant data-src="assets/images/patterns/woven-plaid-black-tile.jpg" data-thumb="assets/images/patterns/woven-plaid-black-tile-thumb.jpg">Black</span></li><li><span data-variant data-src="assets/images/patterns/woven-plaid-violet-tile.jpg" data-thumb="assets/images/patterns/woven-plaid-violet-tile-thumb.jpg">Violet</span></li><li><span data-variant data-src="assets/images/patterns/woven-plaid-brown-tile.jpg" data-thumb="assets/images/patterns/woven-plaid-brown-tile-thumb.jpg">Brown</span></li></ul></li></ul>
-      <label class="scale"><span>Smaller</span><input type="range" min="80" max="720" step="10" value="420" data-scale aria-label="Repeat size"><span>Bigger</span></label>
+      <ul class="sr" data-slides><li><span data-slide data-src="assets/images/patterns/toile-de-jouy-park-swatch.jpg" data-alt="Modern Whimsical Toile de Jouy Park Scene, surface pattern by Virrvarrvilt" data-repeat="block">Modern Whimsical Toile de Jouy Park Scene</span></li><li><span data-slide data-src="assets/images/patterns/navy-flame-stitch-swatch.jpg" data-alt="Navy Flame Stitch, surface pattern by Virrvarrvilt" data-repeat="block">Navy Flame Stitch</span></li><li><span data-slide data-src="assets/images/patterns/pink-violet-weave-swatch.jpg" data-alt="Pink Violet Weave, surface pattern by Virrvarrvilt" data-repeat="block">Pink Violet Weave</span></li><li><span data-slide data-src="assets/images/patterns/tangled-ribbons-swatch.jpg" data-alt="Tangled Ribbons, surface pattern by Virrvarrvilt" data-repeat="block">Tangled Ribbons</span></li><li><span data-slide data-src="assets/images/patterns/moire-waves-swatch.jpg" data-alt="Moiré Waves, surface pattern by Virrvarrvilt" data-repeat="block">Moiré Waves</span></li><li><span data-slide data-src="assets/images/patterns/pastel-space-dye-swatch.jpg" data-alt="Pastel Space Dye, surface pattern by Virrvarrvilt" data-repeat="block">Pastel Space Dye</span></li><li><span data-slide data-src="assets/images/patterns/holographic-patchwork-swatch.jpg" data-alt="Holographic Patchwork, surface pattern by Virrvarrvilt" data-repeat="block">Holographic Patchwork</span></li><li><span data-slide data-src="assets/images/patterns/color-block-grid-six-color-swatch.jpg" data-alt="Color Block Grid, surface pattern by Virrvarrvilt" data-repeat="block">Color Block Grid</span><ul><li><span data-variant data-src="assets/images/patterns/color-block-grid-six-color-swatch.jpg" data-thumb="assets/images/patterns/color-block-grid-six-color-swatch-thumb.jpg">Six color</span></li><li><span data-variant data-src="assets/images/patterns/color-block-grid-pink-mustard-swatch.jpg" data-thumb="assets/images/patterns/color-block-grid-pink-mustard-swatch-thumb.jpg">Pink &amp; mustard</span></li></ul></li><li><span data-slide data-src="assets/images/patterns/midnight-shapes-swatch.jpg" data-alt="Midnight Shapes, surface pattern by Virrvarrvilt" data-repeat="block">Midnight Shapes</span></li><li><span data-slide data-src="assets/images/patterns/coral-teal-loops-swatch.jpg" data-alt="Coral &amp; Teal Loops, surface pattern by Virrvarrvilt" data-repeat="block">Coral &amp; Teal Loops</span></li><li><span data-slide data-src="assets/images/patterns/atomic-diamonds-swatch.jpg" data-alt="Atomic Diamonds, surface pattern by Virrvarrvilt" data-repeat="block">Atomic Diamonds</span></li><li><span data-slide data-src="assets/images/patterns/fairy-tale-forest-swatch.jpg" data-alt="Fairy Tale Forest, surface pattern by Virrvarrvilt" data-repeat="block">Fairy Tale Forest</span></li><li><span data-slide data-src="assets/images/patterns/woven-plaid-black-swatch.jpg" data-alt="Woven Plaid, surface pattern by Virrvarrvilt" data-repeat="block">Woven Plaid</span><ul><li><span data-variant data-src="assets/images/patterns/woven-plaid-black-swatch.jpg" data-thumb="assets/images/patterns/woven-plaid-black-swatch-thumb.jpg">Black</span></li><li><span data-variant data-src="assets/images/patterns/woven-plaid-violet-swatch.jpg" data-thumb="assets/images/patterns/woven-plaid-violet-swatch-thumb.jpg">Violet</span></li><li><span data-variant data-src="assets/images/patterns/woven-plaid-brown-swatch.jpg" data-thumb="assets/images/patterns/woven-plaid-brown-swatch-thumb.jpg">Brown</span></li></ul></li></ul>
+      <label class="scale"><span>Smaller</span><input type="range" min="100" max="200" step="5" value="100" data-scale aria-label="Zoom"><span>Bigger</span></label>
     </div>
   </section>
   <p class="pv-note">© Virrvarrvilt. All designs are protected and not for reuse or resale.</p>
@@ -393,94 +392,27 @@ $(document).ready(function() {
 </script>
 
 <script>
-/* Virrvarrvilt pattern banner: one tile / in repeat, size slider, arrows, swipe, colorway thumbnails. */
+/* Virrvarrvilt pattern viewer: prebaked swatches (no repeat tile is ever sent), zoom slider, arrows, swipe, colorway thumbnails. */
 (function () {
   "use strict";
-  // Pattern viewer: one tile first, then the repeat, with a size slider.
   document.querySelectorAll("[data-viewer]").forEach(function (v) {
-    var stage = v.querySelector(".viewer-stage"), img = v.querySelector(".viewer-single");
-    var controls = v.querySelector("[data-controls]"), range = v.querySelector("[data-scale]");
-    var buttons = v.querySelectorAll("[data-mode]");
-    var repeat = stage.getAttribute("data-repeat") || "block";
-    var unit = null, uw = 1, uh = 1, mode = "repeat";
-    controls.hidden = false;
+    var stage = v.querySelector(".viewer-stage"), range = v.querySelector("[data-scale]");
+    var box = v.querySelector("[data-swatches]"), slides = v.querySelectorAll("[data-slide]"), cur = 0;
+    v.querySelector("[data-controls]").hidden = false;
 
-    // Build one repeat unit; half-drop, brick and mirror need more than a single tile.
-    function buildUnit(done) {
-      if (unit) return done();
-      function go() {
-        var w = img.naturalWidth || 1200, h = img.naturalHeight || 1200;
-        if (repeat === "block") { unit = img.currentSrc || img.src; return done(); }
-        var c = document.createElement("canvas"), x = c.getContext("2d");
-        if (repeat === "half-drop") {
-          c.width = 2 * w; c.height = h; uw = 2;
-          x.drawImage(img, 0, 0, w, h); x.drawImage(img, w, -h / 2, w, h); x.drawImage(img, w, h / 2, w, h);
-        } else if (repeat === "brick") {
-          c.width = w; c.height = 2 * h; uh = 2;
-          x.drawImage(img, 0, 0, w, h); x.drawImage(img, -w / 2, h, w, h); x.drawImage(img, w / 2, h, w, h);
-        } else {
-          c.width = 2 * w; c.height = 2 * h; uw = 2; uh = 2;
-          [[0, 0, 1, 1], [1, 0, -1, 1], [0, 1, 1, -1], [1, 1, -1, -1]].forEach(function (q) {
-            x.save();
-            x.translate(q[0] * w + (q[2] < 0 ? w : 0), q[1] * h + (q[3] < 0 ? h : 0));
-            x.scale(q[2], q[3]); x.drawImage(img, 0, 0, w, h); x.restore();
-          });
-        }
-        try {
-          c.toBlob(function (b) { unit = b ? URL.createObjectURL(b) : (img.currentSrc || img.src); done(); });
-        } catch (err) { unit = img.currentSrc || img.src; uw = uh = 1; done(); }
-      }
-      if (img.complete && img.naturalWidth) go(); else img.addEventListener("load", go, { once: true });
-    }
-    // One slider sizes both views, so the single tile and the repeat stay the same scale.
+    // The slider zooms the swatch: 100 fills the stage, 200 shows it twice as large.
     function size() {
-      var s = +range.value;
-      var ratio = (img.naturalWidth || 1) / (img.naturalHeight || 1);
-      // Leave room for the arrows so they sit beside the tile, not on it.
-      var arrow = v.querySelector(".viewer-arrow:not([hidden])");
-      var room = arrow ? stage.clientWidth - 2 * (arrow.offsetLeft + arrow.offsetWidth + 8) : stage.clientWidth * 0.9;
-      // And for the colorway thumbnails under it.
-      var sw = v.querySelector("[data-swatches]:not([hidden])");
-      var tall = sw ? stage.clientHeight - 2 * (sw.offsetHeight + 24) : stage.clientHeight * 0.9;
-      var fit = Math.min(room, tall * ratio);
-      img.style.width = Math.min(s, fit) + "px";
-      if (mode === "repeat") stage.style.backgroundSize = (s * uw) + "px " + (s * uh) + "px";
+      var cover = Math.max(stage.clientWidth, stage.clientHeight);
+      stage.style.backgroundSize = Math.round(cover * range.value / 100) + "px";
     }
-    function setMode(m) {
-      mode = m;
-      buttons.forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-mode") === m)); });
-      if (m === "repeat") {
-        buildUnit(function () {
-          stage.style.backgroundImage = 'url("' + unit + '")';
-          size(); stage.classList.add("is-repeat");
-        });
-      } else {
-        stage.classList.remove("is-repeat"); stage.style.backgroundImage = "none"; size();
-      }
-    }
-    buttons.forEach(function (b) { b.addEventListener("click", function () { setMode(b.getAttribute("data-mode")); }); });
-    range.addEventListener("input", size);
-
-    window.addEventListener("resize", size);
-    if (img.complete) size(); else img.addEventListener("load", size, { once: true });
-    setMode("repeat");
-    // Keep the patterns from being saved with a right click or a drag (as far as a browser allows).
-    var guard = function (e) { e.preventDefault(); };
-    var art = v.closest("article") || v;
-    art.addEventListener("contextmenu", function (e) { if (e.target.closest(".pv, img")) guard(e); });
-    art.addEventListener("dragstart", function (e) { if (e.target.closest(".pv, img")) guard(e); });
-    art.querySelectorAll("img").forEach(function (i) { i.setAttribute("draggable", "false"); });
-
-    var slides = v.querySelectorAll("[data-slide]");
-    if (!slides.length) return;
-    var cur = 0, box = v.querySelector("[data-swatches]");
-
     function load(src, alt) {
-      if (unit && unit.indexOf("blob:") === 0) URL.revokeObjectURL(unit);
-      unit = null; uw = uh = 1;
-      img.addEventListener("load", function () { setMode(mode); }, { once: true });
-      img.alt = alt;
-      img.src = src;
+      var im = new Image();
+      im.onload = function () {
+        stage.style.backgroundImage = 'url("' + src + '")';
+        stage.setAttribute("aria-label", alt);
+        size();
+      };
+      im.src = src;
     }
     // Colorways: small thumbnails at the bottom of the stage swap the pattern in place.
     function swatches(slide) {
@@ -502,38 +434,46 @@ $(document).ready(function() {
         box.appendChild(b);
       });
     }
-    swatches(slides[0]);
-    if (slides.length < 2) return;
-
-    // Banner with several patterns: arrows, arrow keys and a swipe step through them, one at a time.
-    var prev = v.querySelector("[data-prev]"), next = v.querySelector("[data-next]");
-    prev.hidden = next.hidden = false;
-    size();
     function show(n) {
       cur = (n + slides.length) % slides.length;
       var s = slides[cur];
-      repeat = s.getAttribute("data-repeat") || "block";
-      stage.setAttribute("data-repeat", repeat);
       load(s.getAttribute("data-src"), s.getAttribute("data-alt"));
       swatches(s);
     }
-    prev.addEventListener("click", function () { show(cur - 1); });
-    next.addEventListener("click", function () { show(cur + 1); });
-    v.addEventListener("keydown", function (e) {
-      if (e.target.matches && e.target.matches("input")) return;
-      if (e.key === "ArrowLeft") show(cur - 1);
-      if (e.key === "ArrowRight") show(cur + 1);
-    });
-    var x0 = null, y0 = null;
-    stage.addEventListener("touchstart", function (e) { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive: true });
-    stage.addEventListener("touchend", function (e) {
-      if (x0 === null) return;
-      var dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0;
-      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) show(cur + (dx < 0 ? 1 : -1));
-      x0 = null;
-    }, { passive: true });
-  });
 
+    range.addEventListener("input", size);
+    window.addEventListener("resize", size);
+
+    // Several patterns: arrows, arrow keys and a swipe step through them, one at a time.
+    if (slides.length > 1) {
+      var prev = v.querySelector("[data-prev]"), next = v.querySelector("[data-next]");
+      prev.hidden = next.hidden = false;
+      prev.addEventListener("click", function () { show(cur - 1); });
+      next.addEventListener("click", function () { show(cur + 1); });
+      v.addEventListener("keydown", function (e) {
+        if (e.target.matches && e.target.matches("input")) return;
+        if (e.key === "ArrowLeft") show(cur - 1);
+        if (e.key === "ArrowRight") show(cur + 1);
+      });
+      var x0 = null, y0 = null;
+      stage.addEventListener("touchstart", function (e) { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive: true });
+      stage.addEventListener("touchend", function (e) {
+        if (x0 === null) return;
+        var dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0;
+        if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) show(cur + (dx < 0 ? 1 : -1));
+        x0 = null;
+      }, { passive: true });
+    }
+
+    // Keep the patterns from being saved with a right click or a drag (as far as a browser allows).
+    var art = v.closest("article") || v;
+    var guard = function (e) { if (e.target.closest(".pv, img")) e.preventDefault(); };
+    art.addEventListener("contextmenu", guard);
+    art.addEventListener("dragstart", guard);
+    art.querySelectorAll("img").forEach(function (i) { i.setAttribute("draggable", "false"); });
+
+    show(0);
+  });
 })();
 </script>
 </body>
