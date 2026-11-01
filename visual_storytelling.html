@@ -57,6 +57,13 @@
       color: inherit !important;
     }
   </style>
+<style>
+  .repeat-viewer { --ink: #363330; --grey: #6e655b; margin-bottom: 1.5rem; }
+  .repeat-stage { height: clamp(380px, 70vh, 800px); background-color: #FAF7F0; background-repeat: repeat; background-position: center; }
+  .repeat-controls { display: flex; align-items: center; justify-content: center; gap: .9rem; padding: 1rem 0 0; margin: 0;
+    font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; color: var(--grey); }
+  .repeat-controls input { width: min(280px, 50vw); accent-color: var(--ink); appearance: auto; -webkit-appearance: auto; opacity: 1; display: inline-block; margin: 0; }
+</style>
 </head>
 
 <body>
@@ -161,13 +168,19 @@ document.addEventListener("DOMContentLoaded", function() {
 <article class="post featured">
   <header class="major">
     <h2 class="h11" style="font-size:2rem;">Patterns</h2>
+    <img src="assets/images/virrvarrvilt_logo.svg" alt="Virrvarrvilt" style="height:4.5rem; width:auto; display:block; margin:0.75rem auto 0.25rem;" />
     <span class="date">2026</span>
   </header>
 
-  <!-- Main Image -->
-  <a href="https://www.spoonflower.com/profiles/virrvarrvilt" class="image main" style="padding:0;" target="_blank" rel="noopener">
-    <img src="assets/images/pattern_botanical.jpg" alt="" style="width:100%; aspect-ratio:1600/1145; object-fit:cover; display:block;" />
-  </a>
+  <!-- Main Image: pattern in repeat with a size slider. data-repeat: "block" or "half-drop" -->
+  <section class="repeat-viewer" data-src="assets/images/toile-de-jouy-park-tile.jpg" data-repeat="block">
+    <div class="repeat-stage" role="img" aria-label="Toile de Jouy park pattern in repeat"></div>
+    <label class="repeat-controls">
+      <span>Smaller</span>
+      <input type="range" min="80" max="720" step="10" value="300" aria-label="Repeat size">
+      <span>Bigger</span>
+    </label>
+  </section>
   <!-- Two Smaller Images -->
   <div class="small-images">
     <img src="assets/images/pattern_detail1.png" alt="" style="aspect-ratio:4/3; object-fit:cover;">
@@ -335,5 +348,30 @@ $(document).ready(function() {
 });
 </script>
 
+<script>
+document.querySelectorAll(".repeat-viewer").forEach(function (v) {
+  var stage = v.querySelector(".repeat-stage"), range = v.querySelector("input");
+  var src = v.getAttribute("data-src"), halfDrop = v.getAttribute("data-repeat") === "half-drop";
+  var img = new Image();
+  function size() {
+    var s = +range.value;
+    stage.style.backgroundSize = (halfDrop ? 2 * s : s) + "px " + s + "px";
+  }
+  img.onload = function () {
+    var url = src;
+    if (halfDrop) {
+      // One half-drop unit: the tile, plus the tile shifted down by half on its right.
+      var w = img.naturalWidth, h = img.naturalHeight, c = document.createElement("canvas"), x = c.getContext("2d");
+      c.width = 2 * w; c.height = h;
+      x.drawImage(img, 0, 0); x.drawImage(img, w, -h / 2); x.drawImage(img, w, h / 2);
+      url = c.toDataURL("image/jpeg", 0.9);
+    }
+    stage.style.backgroundImage = 'url("' + url + '")';
+    size();
+  };
+  img.src = src;
+  range.addEventListener("input", size);
+});
+</script>
 </body>
 </html>
