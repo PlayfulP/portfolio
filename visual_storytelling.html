@@ -67,6 +67,7 @@
   .pv .viewer-single { width: min(420px, 76vw, 62vh); max-width: none; height: auto !important; box-shadow: 0 30px 60px -40px rgba(54, 51, 48, .5); transition: opacity .45s ease, transform .45s ease; }
   .pv .viewer-single, .pv .viewer-stage { -webkit-user-drag: none; user-select: none; -webkit-user-select: none; }
   .pv .viewer-single { pointer-events: none; }
+  .pv-note { margin: -0.75rem 0 1.5rem; text-align: center; font-size: .75rem; letter-spacing: .04em; color: #6e655b; }
   .pv .viewer-stage.is-repeat .viewer-single { opacity: 0; transform: scale(.94); }
   .pv button { appearance: none !important; height: auto !important; line-height: 1 !important; padding: 0 !important; margin: 0; box-shadow: none !important;
     border-radius: 0; letter-spacing: .05em !important; text-transform: none !important; font-weight: 400 !important; font-size: .88rem !important; white-space: nowrap; cursor: pointer; }
@@ -205,7 +206,7 @@ document.addEventListener("DOMContentLoaded", function() {
   <!-- Main: pattern viewer. One tile or in repeat, size slider, arrows, swipe and colorways -->
   <section class="pv" data-viewer aria-label="Pattern viewer">
     <div class="viewer-stage" data-repeat="block">
-      <img class="viewer-single" draggable="false" src="assets/images/patterns/pastel-space-dye-tile.jpg" width="1200" height="1200" alt="Pastel Space Dye, surface pattern by Virrvarrvilt">
+      <img class="viewer-single" draggable="false" src="assets/images/patterns/pastel-space-dye-tile.jpg" width="800" height="800" alt="Pastel Space Dye, surface pattern by Virrvarrvilt">
       <button type="button" class="viewer-arrow viewer-prev" data-prev aria-label="Previous pattern" hidden>&#8592;</button><button type="button" class="viewer-arrow viewer-next" data-next aria-label="Next pattern" hidden>&#8594;</button>
       <div class="viewer-swatches" data-swatches role="group" aria-label="Colorways" hidden></div>
     </div>
@@ -214,6 +215,7 @@ document.addEventListener("DOMContentLoaded", function() {
       <label class="scale"><span>Smaller</span><input type="range" min="80" max="720" step="10" value="420" data-scale aria-label="Repeat size"><span>Bigger</span></label>
     </div>
   </section>
+  <p class="pv-note">© Virrvarrvilt. All designs are protected and not for reuse or resale.</p>
   <!-- Two Smaller Images -->
   <div class="small-images">
     <img src="assets/images/pattern_detail1.png" alt="" style="aspect-ratio:4/3; object-fit:cover;">
